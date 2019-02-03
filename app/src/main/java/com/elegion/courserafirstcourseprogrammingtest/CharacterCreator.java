@@ -32,7 +32,6 @@ public class CharacterCreator extends Observable  implements Serializable{
     private Map<String, Integer> mAttributesMap = new HashMap<>();
     private Map<String, Boolean> mPerksMap = new HashMap<>();
 
-
     public CharacterCreator() {
         mRace = Race.HUMAN;
         mSpecialization = Specialization.WARRIOR;
@@ -43,7 +42,6 @@ public class CharacterCreator extends Observable  implements Serializable{
         mAttributesMap.put(Attribute.STAMINA.name(), 5);
         mAttributesMap.put(Attribute.LUCK.name(), 5);
     }
-
 
     public String[] getSpecializations() {
         /*
@@ -86,18 +84,17 @@ public class CharacterCreator extends Observable  implements Serializable{
         *    Строка должна быть формата - первая буква заглавная, остальные строчные
         *   One, Two, Three
         * */
-        String[] rases = new String[Race.values().length];
+        String[] races = new String[Race.values().length];
         int i = 0;
         for (Race value : Race.values()) {
-            rases[i] = value.toString().toLowerCase();
-            rases[i] = rases[i].replace(rases[i].substring(0,1),rases[i].substring(0,1).toUpperCase());
+            races[i] = value.toString().toLowerCase();
+            races[i] = races[i].replace(races[i].substring(0,1),races[i].substring(0,1).toUpperCase());
             i++;
         }
-        return rases;
+        return races;
     }
 
     public void setRace(int position) {
-        // TODO: 11.12.2017
         /*
         *  этот метод задает специализацию в переменную mRace
         *  на вход подается число, и из enum Race выбирается соответствующая раса
@@ -109,32 +106,47 @@ public class CharacterCreator extends Observable  implements Serializable{
         *  если введенное число больше длины enum, то в mRace записывается самое последнее (длина - 1) значение
         *
         * */
+        if(position < 0)
+            mRace = Race.values()[0];
+        else if(position > Specialization.values().length - 1)
+            mRace = Race.values()[Specialization.values().length - 1];
+        else
+            mRace = Race.values()[position];
     }
 
     public String[] getAttributes() {
-
-        // TODO: 11.12.2017
         /*
         *   этот метод должен возвращать массив строк, созданных на основе enum Attribute
         *    Строка должна быть формата - первая буква заглавная, остальные строчные
         *   One, Two, Three
         * */
-        return new String[]{""};
-
+        String[] attrs = new String[Attribute.values().length];
+        int i = 0;
+        for (Attribute value : Attribute.values()) {
+            attrs[i] = value.toString().toLowerCase();
+            attrs[i] = attrs[i].replace(attrs[i].substring(0,1),attrs[i].substring(0,1).toUpperCase());
+            i++;
+        }
+        return attrs;
     }
 
     public String[] getPerks() {
-        // TODO: 11.12.2017
         /*
         *   этот метод должен возвращать массив строк, созданных на основе enum Perk
         *   Строка должна быть формата - первая буква заглавная, остальные строчные
         *   One, Two, Three
         *
         * */
-
-        return new String[]{""};
-
+        String[] perks = new String[Perk.values().length];
+        int i = 0;
+        for (Perk value : Perk.values()) {
+            perks[i] = value.toString().toLowerCase();
+            perks[i] = perks[i].replace(perks[i].substring(0,1),perks[i].substring(0,1).toUpperCase());
+            i++;
+        }
+        return perks;
     }
+
     public void updateAttributeValue(int position, int updateTo) {
         // TODO: 11.12.2017
         /*

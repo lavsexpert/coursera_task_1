@@ -139,29 +139,28 @@ public class CreateCharacterFragment extends Fragment implements Observer {
     }
 
     private void addParametersList() {
-        // TODO: 11.12.2017  раскоментируйте это после того, как доделаете логику CharacterCreator.getAttributes();
-//        String[] params = mCreator.getAttributes();
-//        mParamValues = new TextView[params.length];
-//        mParamControlButtons = new ImageButton[params.length * 2];
-//
-//        LayoutInflater inflater = LayoutInflater.from(getActivity());
-//        for (int i = 0, size = params.length; i < size; i++) {
-//            View paramsRow = inflater.inflate(R.layout.li_parameter, mParamsContainer, false);
-//            TextView paramName = paramsRow.findViewById(R.id.tv_param_name);
-//            paramName.setText(params[i]);
-//
-//            TextView paramValue = paramsRow.findViewById(R.id.tv_param_value);
-//            mParamValues[i] = paramValue;
-//            mParamValues[i].setTag(params[i]);
-//
-//            ImageButton decreaseParam = paramsRow.findViewById(R.id.ib_param_decrease);
-//            mParamControlButtons[i] = decreaseParam;
-//
-//            ImageButton increaseParam = paramsRow.findViewById(R.id.ib_param_increase);
-//            mParamControlButtons[i + size] = increaseParam;
-//
-//            mParamsContainer.addView(paramsRow);
-//        }
+        String[] params = mCreator.getAttributes();
+        mParamValues = new TextView[params.length];
+        mParamControlButtons = new ImageButton[params.length * 2];
+
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
+        for (int i = 0, size = params.length; i < size; i++) {
+            View paramsRow = inflater.inflate(R.layout.li_parameter, mParamsContainer, false);
+            TextView paramName = paramsRow.findViewById(R.id.tv_param_name);
+            paramName.setText(params[i]);
+
+            TextView paramValue = paramsRow.findViewById(R.id.tv_param_value);
+            mParamValues[i] = paramValue;
+            mParamValues[i].setTag(params[i]);
+
+            ImageButton decreaseParam = paramsRow.findViewById(R.id.ib_param_decrease);
+            mParamControlButtons[i] = decreaseParam;
+
+            ImageButton increaseParam = paramsRow.findViewById(R.id.ib_param_increase);
+            mParamControlButtons[i + size] = increaseParam;
+
+            mParamsContainer.addView(paramsRow);
+        }
 
         // TODO: 11.12.2017  раскоментируйте это после того, как доделаете логику CharacterCreator.updateAttributeValue();
 
@@ -180,22 +179,20 @@ public class CreateCharacterFragment extends Fragment implements Observer {
     }
 
     private void addPerks() {
-        // TODO: 11.12.2017  раскоментируйте это после того, как доделаете логику CharacterCreator.getPerks();
+        String perks[] = mCreator.getPerks();
 
-//        String perks[] = mCreator.getPerks();
-//
-//        for (String perk : perks) {
-//            CheckBox checkBox = new CheckBox(getActivity());
-//            checkBox.setText(perk);
-//            checkBox.setTag(perk);
-//            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                @Override
-//                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                    mCreator.checkPerk(buttonView.getText().toString(), isChecked);
-//                }
-//            });
-//            mPerksContainer.addView(checkBox);
-//        }
+        for (String perk : perks) {
+            CheckBox checkBox = new CheckBox(getActivity());
+            checkBox.setText(perk);
+            checkBox.setTag(perk);
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    mCreator.checkPerk(buttonView.getText().toString(), isChecked);
+                }
+            });
+            mPerksContainer.addView(checkBox);
+        }
     }
 
     @Override

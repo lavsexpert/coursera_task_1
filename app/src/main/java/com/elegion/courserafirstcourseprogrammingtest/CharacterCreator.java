@@ -1,6 +1,7 @@
 package com.elegion.courserafirstcourseprogrammingtest;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
@@ -45,14 +46,19 @@ public class CharacterCreator extends Observable  implements Serializable{
 
 
     public String[] getSpecializations() {
-        // TODO: 11.12.2017
+
+        String[] specs = new String[Specialization.values().length];
+        int i = 0;
+        for (Specialization value : Specialization.values()) {
+            specs[i] = value.toString().toLowerCase();
+            specs[i] = specs[i].replace(specs[i].substring(0,1),specs[i].substring(0,1).toUpperCase());
+            i++;
+        }
+        return specs;
         /*
         *   этот метод должен возвращать массив строк, созданных на основе enum Specialization
         *   Строки должны начинаться с заглавной буквы, остальные строчные
         * */
-
-        return new String[]{""};
-
     }
 
     public void setSpecialization(int position) {

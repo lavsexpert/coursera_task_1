@@ -120,26 +120,23 @@ public class CreateCharacterFragment extends Fragment implements Observer {
     }
 
     private void addSpecializations() {
-        // TODO: 11.12.2017 раскоментируйте это после того, как доделаете логику CharacterCreator.getSpecializations()
+        String[] specializations = mCreator.getSpecializations();
+        for (String s : specializations) {
+            RadioButton button = new RadioButton(getActivity());
+            button.setText(s);
+            button.setId(View.generateViewId());
+            mSpecializationsRadioGroup.addView(button);
+        }
 
-//        String[] specializations = mCreator.getSpecializations();
-//        for (String s : specializations) {
-//            RadioButton button = new RadioButton(getActivity());
-//            button.setText(s);
-//            button.setId(View.generateViewId());
-//            mSpecializationsRadioGroup.addView(button);
-//        }
-//
-//        mSpecializationsRadioGroup.check(mSpecializationsRadioGroup.getChildAt(mCreator.getSpecializationPosition()).getId());
-//        mSpecializationsRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup group, int checkedId) {
-//                RadioButton checked = group.findViewById(checkedId);
-//                int position = group.indexOfChild(checked);
-//                mCreator.setSpecialization(position);
-//            }
-//
-//        });
+        mSpecializationsRadioGroup.check(mSpecializationsRadioGroup.getChildAt(mCreator.getSpecializationPosition()).getId());
+        mSpecializationsRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton checked = group.findViewById(checkedId);
+                int position = group.indexOfChild(checked);
+                mCreator.setSpecialization(position);
+            }
+        });
     }
 
     private void addParametersList() {

@@ -1,7 +1,6 @@
 package com.elegion.courserafirstcourseprogrammingtest;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
@@ -148,7 +147,15 @@ public class CharacterCreator extends Observable  implements Serializable{
     }
 
     public void updateAttributeValue(int position, int updateTo) {
-        // TODO: 11.12.2017
+
+        int oldValue = mAttributesMap.get(getAttributes()[position].toUpperCase()).intValue();
+        if ((updateTo > 0 & updateTo <= mAvailablePoints)
+                | (updateTo < 0 & (oldValue + updateTo) >= 1)) {
+            mAttributesMap.put(getAttributes()[position].toUpperCase(),oldValue + updateTo);
+            mAvailablePoints = mAvailablePoints - updateTo;
+        }
+        setChanged();
+        notifyObservers();
         /*
         *  этот метод увеличивает/уменьшает соответствующее значение атрибута
         *  рекомендуется реализовывать его в последнюю очередь

@@ -46,7 +46,11 @@ public class CharacterCreator extends Observable  implements Serializable{
 
 
     public String[] getSpecializations() {
-
+        /*
+         *   этот метод должен возвращать массив строк, созданных на основе enum Specialization
+         *   Строки должны начинаться с заглавной буквы, остальные строчные
+         *
+         * */
         String[] specs = new String[Specialization.values().length];
         int i = 0;
         for (Specialization value : Specialization.values()) {
@@ -55,14 +59,9 @@ public class CharacterCreator extends Observable  implements Serializable{
             i++;
         }
         return specs;
-        /*
-        *   этот метод должен возвращать массив строк, созданных на основе enum Specialization
-        *   Строки должны начинаться с заглавной буквы, остальные строчные
-        * */
     }
 
     public void setSpecialization(int position) {
-        // TODO: 11.12.2017
         /*
         *  этот метод задает специализацию в переменную mSpecialization
         *  на вход подается число, и из enum Specialization выбирается соответствующий класс
@@ -73,18 +72,28 @@ public class CharacterCreator extends Observable  implements Serializable{
         *  если введенное число больше длины enum, то в mSpecialization записывается самое последнее (длина - 1) значение
         *
         * */
-
+        if(position < 0)
+            mSpecialization = Specialization.values()[0];
+        else if(position > Specialization.values().length - 1)
+            mSpecialization = Specialization.values()[Specialization.values().length - 1];
+        else
+            mSpecialization = Specialization.values()[position];
     }
 
     public String[] getRaces() {
-        // TODO: 11.12.2017
         /*
         *   этот метод должен возвращать массив строк, созданных на основе enum Races
         *    Строка должна быть формата - первая буква заглавная, остальные строчные
         *   One, Two, Three
         * */
-
-        return new String[]{""};
+        String[] rases = new String[Race.values().length];
+        int i = 0;
+        for (Race value : Race.values()) {
+            rases[i] = value.toString().toLowerCase();
+            rases[i] = rases[i].replace(rases[i].substring(0,1),rases[i].substring(0,1).toUpperCase());
+            i++;
+        }
+        return rases;
     }
 
     public void setRace(int position) {
